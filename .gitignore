@@ -1,3 +1,4 @@
 .idea/
 venv/
-app/db/settings*
+app/db/settings.py
+temp.py
