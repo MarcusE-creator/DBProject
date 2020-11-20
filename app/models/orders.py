@@ -6,10 +6,10 @@ from sqlalchemy import Column, Integer, String, TIMESTAMP, ForeignKey
 class Order(Base):
     __tablename__ = 'orders'
 
-    order_number = Column(Integer, primary_key=True)  # PRIMARY KEY
-    customer_id = Column(Integer, ForeignKey('customers.id'), ondelete="Set Null", onupdate="Cascade")  # FOREIGN KEY --> Customers
-    employee_id = Column(Integer, ForeignKey('employees.id'), ondelete="Set Null", onupdate="Cascade")  # FOREIGN KEY --> Employees
-    store_id = Column(Integer, ForeignKey('stores.id'), ondelete="Set Null", onupdate="Cascade")  # FOREIGN KEY --> Stores
+    id = Column(Integer, primary_key=True)  # PRIMARY KEY
+    customer_id = Column(Integer, ForeignKey('customers.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Customers
+    employee_id = Column(Integer, ForeignKey('employees.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Employees
+    store_id = Column(Integer, ForeignKey('stores.id', ondelete="Set Null", onupdate="Cascade"))  # FOREIGN KEY --> Stores
 
     date_created = Column(TIMESTAMP, nullable=False)  # TODO
     status = Column(String(45), nullable=False)

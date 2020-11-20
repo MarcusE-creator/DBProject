@@ -16,12 +16,12 @@ class Product(Base):
     lowest_amount = Column(Integer, nullable=False)
     automatic_order_number = Column(Integer, nullable=False)
     expected_delivery_date = Column(types.Date)
-    manufacturer_id = Column(Integer, ForeignKey("partners.id"), ondelete="Set Null", onupdate="Cascade")
-    supplier_id = Column(Integer, ForeignKey("partners.id"), ondelete="Set Null", onupdate="Cascade")
+    manufacturer_id = Column(Integer, ForeignKey("partners.id", ondelete="Set Null", onupdate="Cascade"))
+    supplier_id = Column(Integer, ForeignKey("partners.id", ondelete="Set Null", onupdate="Cascade"))
 
-    partners = relationship("Partner", back_populate="products")
+    partners = relationship("Partner", back_populates="products")
     car_models = relationship("CarModel", secondary="matching_parts")
 
     def __repr__(self):
         return f"{self.name} - {self.description}. Lagerplats: {self.inventory_id}. Lagerantal: {self.stock}. Inpris: "\
-               f"{self.price_in}, utpris: {self.price_out}. Tillverkare: {self.manufacturer}. Leverantör: {self.supplier}"
+               f"{self.price_in}, utpris: {self.price_out}."

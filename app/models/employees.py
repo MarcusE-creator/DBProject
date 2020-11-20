@@ -7,7 +7,7 @@ class Employee(Base):
     __tablename__ = "employees"
 
     id = Column(Integer, primary_key=True)  # PRIMARY KEY
-    store_id = Column(Integer, ForeignKey('stores.id'), nullable=False, ondelete="Restrict", onupdate="Cascade")  # FOREIGN KEY --> Stores
+    store_id = Column(Integer, ForeignKey('stores.id', ondelete="Restrict", onupdate="Cascade"), nullable=False)  # FOREIGN KEY --> Stores
 
     name = Column(String(100), nullable=False)
     phone = Column(String(25), nullable=False)

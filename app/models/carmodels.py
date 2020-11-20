@@ -12,7 +12,7 @@ class CarModel(Base):
     year_model = Column(String(4), nullable=False)
 
     products = relationship("Products", secondary="matching_parts")
-    cars = relationship("CustomerCar", back_populate="car_model")
+    cars = relationship("CustomerCar", back_populates="car_model")
 
     def __repr__(self):
         return f"{self.manufacturer} {self.model} ({self.year_model})"
