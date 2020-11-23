@@ -1,6 +1,6 @@
-from UI.car_model_menu import admin_car_model_menu
-from UI.employee_menu import admin_employees_menu
-from UI.product_menu import admin_products_menu
+from UI.car_model_menu import car_model_menu
+from UI.employee_menu import employees_menu
+from UI.product_menu import products_menu
 
 
 def admin_menu():
@@ -19,14 +19,14 @@ def admin_menu():
             pass
             #store_menu()
         elif selected == "2":
-            admin_employees_menu()
+            employees_menu()
         elif selected == "3":
             pass
             #order_menu()
         elif selected == "4":
-            admin_products_menu()
+            products_menu()
         elif selected == "5":
-            admin_car_model_menu()
+            car_model_menu()
         elif selected == "10":
             pass
             #main_menu()
