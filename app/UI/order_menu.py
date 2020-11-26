@@ -4,17 +4,17 @@ from Controllers import order_controller
 # admin / order
 def order_menu():
     while True:
-        print("Ordrar")
+        print("ORDRAR")
         print("-" * 12)
-        print("1. Lägg till ny order")
-        print("2. Redigera/ta bort order")
+        print("1. Redigera/ta bort")
+        print("2.  Lägg till")
         print("3. Adminmeny")
 
         selected = input("> ")
         if selected == "1":
-            create_order()
-        elif selected == "2":
             edit_order()
+        elif selected == "2":
+            create_order()
         elif selected == "3":
             break
         else:
