@@ -1,6 +1,6 @@
 from UI.Admin.employee_menu import employees_menu
 from UI.Admin.store_menu import store_menu
-#from UI.order_menu import order_menu
+from UI.Admin.order_menu import order_menu
 
 
 def admin_menu():

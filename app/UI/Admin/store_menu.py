@@ -33,13 +33,13 @@ def search_and_choose():
             print("Det finns ingen butik som upfyller sökkraven.")
         else:
             print("Matchande sökningar:")
-            for i, store in enumerate(stores):
-                print(f"{i + 1}. {store}")
+            for i, store in enumerate(stores, start=1):
+                print(f"{i}. {store}")
 
             while True:
                 choice = int_input("Vilken butik vill du visa? ")
-                if 1 <= choice <= len(stores):
-                    store = stores[choice - 1]
+                if 1 <= choice < len(stores):
+                    store = stores[choice]
                     break
                 else:
                     print("Du har gjort ett ogiltigt val. Försök igen.")

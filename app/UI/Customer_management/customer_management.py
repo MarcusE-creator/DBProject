@@ -16,6 +16,7 @@ def add_new_customer():
     city = input("Stad: ")
     phone = input("Telefonnummer: ")
     email = input("Email: ")
+
     customer_type_id = int_input("Kundtyp: ange 1 för privatkund och 2 för företagskund: ")
     if customer_type_id == 2:
         print("Fyll i följande uppgifter om kontaktpersonen:")
@@ -23,6 +24,7 @@ def add_new_customer():
         cp_phone = input("Kontaktpersonens telefonnummer: ")
         cp_email = input("Kontaktpersonens email:")
         contact_person = cp_name, cp_phone, cp_email
+
 
         customer = (name, street_address, zip_code, city, phone, email, customer_type_id)
         customer, info_string = cc.add_business(customer, contact_person)
@@ -43,7 +45,7 @@ def show_customer(chosen_customer):
 
     if hasattr(chosen_customer, 'contact_person'):
         print(f"Kontaktperson {chosen_customer.contact_person}")
-        
+
     print(f"Address: {chosen_customer.street_address}")
     print(f"Postkod: {chosen_customer.zip_code}")
     print(f"Email: {chosen_customer.email}")
@@ -132,7 +134,7 @@ def choose_customer(customers):
                     print("Felaktig inmatning.")
     else:
         print("Det finns ingen kund som uppfyller sökkraven")
-                    
+
 
 def show_customer_menu(chosen_customer):
     while True:
@@ -155,7 +157,6 @@ def show_customer_menu(chosen_customer):
 
         elif selected == 3:
             remove_car_menu(chosen_customer)
-            pass
 
         elif selected == 4:
             place_order()
@@ -216,7 +217,7 @@ def remove_car_menu(customer):
 
         else:
             print(f"Hittade ingen bil med registreringsnummer {regnr}")
-            
+
 
 def remove_customer(chosen_customer):
     while True:

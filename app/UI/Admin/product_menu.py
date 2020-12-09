@@ -1,5 +1,6 @@
 from Controllers.product_controller import *
 
+
 def products_menu():
     while True:
         print("PRODUKTER".rjust(13))

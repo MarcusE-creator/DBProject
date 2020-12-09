@@ -150,3 +150,4 @@ def employees_menu():
             break
         else:
             print("Felaktig inmatning")
+
