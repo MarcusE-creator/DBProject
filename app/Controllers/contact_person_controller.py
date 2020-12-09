@@ -1,4 +1,4 @@
-import Data.repositories.conctact_person_repository as cpr
+import Data.repositories.contact_person_repository as cpr
 
 
 def add_contact_person(contact_person, chosen_customer):

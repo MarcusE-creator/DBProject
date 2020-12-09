@@ -1,29 +1,22 @@
-import re
-from Data.models.models import Employee
+from Data.models.employees import Employee
+from Data.db import session
 
 
 def find_employees(search):
-    query_str = re.compile(f'.{search}.', re.IGNORECASE)
-    return Employee.find(**{'name': query_str})
+    return session.query(Employee).filter(Employee.name.like(f'%{search}%')).all()
 
 
 def add_employee(e):
-    store, name, phone, email, job_title = e
-    new = Employee(
-        {
-            "name": name,
-            "store": store,
-            "phone": phone,
-            "email": email,
-            "job_title": job_title
-         })
-    new.save()
-    return new
+    store_id, name, phone, email, job_title = e
+    new_employee = Employee(store_id=store_id, name=name, phone=phone, email=email, job_title=job_title)
+    session.add(new_employee)
+    session.commit()
 
 
 def remove_employee(chosen_employee):
-    Employee.remove(_id=chosen_employee._id)
+    session.delete(chosen_employee)
+    session.commit()
 
 
-def save_changes(chosen_employee):
-    chosen_employee.save()
+def save_changes(_):
+    session.commit()

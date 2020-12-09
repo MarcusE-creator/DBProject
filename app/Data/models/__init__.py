@@ -1,84 +1,16 @@
-from pymongo import MongoClient
-from abc import ABC
-from app.Data.db.settings import *
+import inspect
+import pkgutil
+import importlib
+import sys
 
 
-client = MongoClient(f'mongodb://{HOST}:{PORT}')
-db = client.tard1s
+def import_modules():
+    this_module = sys.modules[__name__]
+
+    for loader, module_name, is_pkg in pkgutil.iter_modules(this_module.__path__, this_module.__name__ + '.'):
+        module = importlib.import_module(module_name, loader.path)
+        for name, _object in inspect.getmembers(module, inspect.isclass):
+            globals()[name] = _object
 
 
-class ResultList(list):
-    def first_or_none(self):
-        return self[0] if len(self) > 0 else None
-
-    def last_or_none(self):
-        return self[-1] if len(self) > 0 else None
-
-
-class Document(dict, ABC):
-    collection = None
-
-    def __init__(self, data):
-        super().__init__()
-        if '_id' not in data:
-            self._id = None
-        self.__dict__.update(data)
-
-    def __repr__(self):
-        return self.__dict__['name']
-
-    def save(self):
-        if not self._id:
-            del(self.__dict__['_id'])
-            return self.collection.insert_one(self.__dict__)
-        else:
-            return self.collection.update({'_id': self._id}, self.__dict__)
-
-    def remove_field(self, field):
-        self.collection.update({'_id': self._id}, {"$unset": {field: ""}})
-
-    @classmethod
-    def add(cls, item):
-        cls(item).save()
-
-    @classmethod
-    def add_many(cls, items):
-        for item in items:
-            cls(item).save()
-
-    @classmethod
-    def all(cls):
-        return [cls(item) for item in cls.collection.find({})]
-
-    @classmethod
-    def find(cls, **kwargs):
-        return ResultList(cls(item) for item in cls.collection.find(kwargs))
-
-    def insert_into_array(self, field_name, new_value):
-        self.collection.update_one({'_id': self._id}, {'$push': {field_name: new_value}})
-
-    def remove_from_array(self, field_name, value):
-        self.collection.update_one({'_id': self._id}, {'$pull': {field_name: value}})
-
-    def update_field(self, field_name, new_value):
-        self.collection.update_one({'_id': self._id}, {'$': {field_name: new_value}})
-
-    def update_field2(self, field_name, new_value):
-        self.collection.update_one({'_id': self._id}, {"$set": {field_name: new_value}})
-
-    @classmethod
-    def remove(cls, **kwargs):
-        cls.collection.delete_many(kwargs)
-
-
-class EmbeddedDocument(dict, ABC):
-    repr_data = None
-
-    def __init__(self, data):
-        super().__init__()
-        if '_id' not in data:
-            self._id = None
-        self.__dict__.update(data)
-
-    def __repr__(self):
-        return self.__dict__[self.repr_data]
+import_modules()

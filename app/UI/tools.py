@@ -14,3 +14,9 @@ def price_input(user_input):
             return float(data)
         except ValueError:
             print("Ditt svar måste vara numeriskt.")
+
+def print_title(title: str) -> None:
+    padded_title = title.center(len(title) + 4)
+    border = '-' * len(padded_title)
+    print(padded_title)
+    print(border)

@@ -1,6 +1,5 @@
 import datetime as dt
 from typing import Optional
-
 from Data.models.ordered_products import OrderedProduct
 from Data.models.orders import Order
 from Data.db import session
