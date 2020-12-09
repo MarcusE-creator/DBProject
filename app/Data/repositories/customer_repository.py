@@ -32,9 +32,9 @@ def add_business(customer, contact_person):
                          'phone': phone,
                          'email': email,
                          'customer_type': customer_type,
-                         'contact_person': {'contact_name': cp_name,
-                                            'contact_phone': cp_phone,
-                                            'contact_email': cp_email},
+                         'contact_person': {'name': cp_name,
+                                            'phone': cp_phone,
+                                            'mail': cp_email},
                         'cars': []})
     customer.save()
     return customer
