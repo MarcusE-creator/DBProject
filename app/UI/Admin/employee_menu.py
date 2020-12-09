@@ -152,4 +152,3 @@ def employees_menu():
             print("Felaktig inmatning")
 
 
-employees_menu()
