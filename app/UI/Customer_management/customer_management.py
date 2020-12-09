@@ -247,6 +247,49 @@ def place_order():
     pass
 
 
+def edit_contact_person(chosen_customer):
+    while True:
+        print("-----------------------")
+        print(f"REDIGERA KONTAKTPERSON")
+        print(f"1. Namn {chosen_customer.contact_person.name}")
+        print(f"2. Telefonnummer {chosen_customer.contact_person.phone}")
+        print(f"3. Email {chosen_customer.contact_person.email}")
+        print("4. Avbryt")
+        print("Vilken rad vill du redigera?")
+        selected = input("> ")
+
+        if selected == "1":
+            chosen_customer.contact_person.name = input("Ange nytt namn: ")
+            changed_string = cc.save_changes(chosen_customer)
+            print(changed_string)
+
+        elif selected == "2":
+            chosen_customer.contact_person.phone = input("Ange nytt telefonnummer: ")
+            changed_string = cc.save_changes(chosen_customer)
+            print(changed_string)
+
+        elif selected == "3":
+            chosen_customer.contact_person.email = input("Ange ny email: ")
+            changed_string = cc.save_changes(chosen_customer)
+            print(changed_string)
+
+        elif selected == "4":
+            break
+
+        else:
+            print("Felaktig inmatning")
+
+
+def add_contact_person(chosen_customer):
+    print("Fyll i följande uppgifter om kontaktpersonen:")
+    cp_name = input("Kontaktpersonens namn: ")
+    cp_phone = input("Kontaktpersonens telefonnummer: ")
+    cp_email = input("Kontaktpersonens email:")
+    contact_person = cp_name, cp_phone, cp_email
+    added_string = cpc.add_contact_person(contact_person, chosen_customer)
+    print(added_string)
+
+
 def edit_customer(chosen_customer):
     while True:
         print("--------------")
@@ -265,49 +308,36 @@ def edit_customer(chosen_customer):
 
         if selected == 1:
             chosen_customer.name = input("Ange nytt namn: ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 2:
             chosen_customer.street_address = input("Ange ny address): ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 3:
             chosen_customer.zip_code = input("Ange ny postkod: ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 4:
             chosen_customer.email = input("Ange ny mail: ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 5:
             chosen_customer.phone = input("Ange nytt telefonnummer: ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 6:
-            while True:
-                cp_id = int_input("Ange id för den nya kontaktpersonen: ")
+            selected = input("Ange 1 för att redigera befintlig kontaktperson eller 2 för att lägga till en ny kontaktperson: ")
+            if selected == "1":
+                edit_contact_person(chosen_customer)
+            elif selected == "2":
+                add_contact_person(chosen_customer)
 
-                if cpc.find_contact_person(cp_id):
-                    chosen_customer.contact_id = cp_id
-                    changed_string = cc.save_changes(chosen_customer)
-                    print(changed_string)
-                    break
-
-                else:
-                    print(f"Hittade ingen kontaktperson med id {cp_id}")
-
-        elif selected == 7:
-            break
         else:
             print("Felaktig inmatning")
 

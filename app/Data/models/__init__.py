@@ -60,6 +60,12 @@ class Document(dict, ABC):
     def remove_from_array(self, field_name, value):
         self.collection.update_one({'_id': self._id}, {'$pull': {field_name: value}})
 
+    def update_field(self, field_name, new_value):
+        self.collection.update_one({'_id': self._id}, {'$': {field_name: new_value}})
+
+    def update_field2(self, field_name, new_value):
+        self.collection.update_one({'_id': self._id}, {"$set": {field_name: new_value}})
+
     @classmethod
     def remove(cls, **kwargs):
         cls.collection.delete_many(kwargs)

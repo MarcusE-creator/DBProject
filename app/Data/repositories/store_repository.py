@@ -16,10 +16,6 @@ def find_store_by_id(id):
     return Store.find(**{'_id': ObjectId(id)})
 
 
-def find_store_by_id(keyword):
-    return Store.find(**{'_id': ObjectId(keyword)})
-
-
 def remove_store(store):
     Store.remove(_id=store._id)
 
