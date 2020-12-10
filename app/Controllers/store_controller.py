@@ -20,7 +20,7 @@ def remove_store(store):
 
 def add_store(store):
     store = sr.add_store(store)
-    return f"Butiken {store} har lagts till."
+    return f"{store} - Tillagd"
 
 
 def main():

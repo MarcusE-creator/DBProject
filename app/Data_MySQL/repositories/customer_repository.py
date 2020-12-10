@@ -21,7 +21,7 @@ def find_customer_by_phone(keyword):
 
 def add_business(customer, contact_person):
     name, street_address, zip_code, city, phone, email, customer_type = customer
-    contact_person = cpr.add_contact_person(contact_person)
+    contact_person = cpr.add_contact_person_to_new_customer(contact_person)
     contact_id = contact_person.id
     customer = Customer(name=name, street_address=street_address, zip_code=zip_code, city=city, phone=phone,
                         email=email, customer_type_id=customer_type, contact_id=contact_id)

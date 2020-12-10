@@ -55,10 +55,13 @@ class Document(dict, ABC):
         return ResultList(cls(item) for item in cls.collection.find(kwargs))
 
     def insert_into_array(self, field_name, new_value):
-        self.collection.update_one({'_id': self._id}, {'$push': {field_name: new_value}})
+        self.collection.update_one({'_id': self._id}, {'$push': {field_name: new_value.to_dict()}})
 
     def remove_from_array(self, field_name, value):
-        self.collection.update_one({'_id': self._id}, {'$pull': {field_name: value}})
+        self.collection.update_one({'_id': self._id}, {'$pull': {field_name: value.to_dict()}})
+
+    def update_field(self, field_name, new_value):
+        self.collection.update_one({'_id': self._id}, {'$set': {field_name: new_value.to_dict()}})
 
     @classmethod
     def remove(cls, **kwargs):
@@ -70,9 +73,11 @@ class EmbeddedDocument(dict, ABC):
 
     def __init__(self, data):
         super().__init__()
-        if '_id' not in data:
-            self._id = None
         self.__dict__.update(data)
 
     def __repr__(self):
         return self.__dict__[self.repr_data]
+
+    def to_dict(self):
+        return self.__dict__
+

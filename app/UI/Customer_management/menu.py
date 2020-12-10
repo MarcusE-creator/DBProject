@@ -19,3 +19,5 @@ def customer_management_menu():
             break
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")
+
+customer_management_menu()

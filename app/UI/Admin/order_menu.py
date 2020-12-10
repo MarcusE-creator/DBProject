@@ -1,4 +1,5 @@
 from Controllers import order_controller
+from UI.tools import print_title
 
 
 def order_menu():
@@ -160,10 +161,3 @@ def print_order(order) -> None:
     print(order.customer.name.center(border_width))
     print(border)
     print(order_data, end='\n\n')
-
-
-def print_title(title: str) -> None:
-    padded_title = title.center(len(title) + 4)
-    border = '-' * len(padded_title)
-    print(padded_title)
-    print(border)

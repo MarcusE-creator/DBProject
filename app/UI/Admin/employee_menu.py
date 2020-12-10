@@ -151,4 +151,3 @@ def employees_menu():
         else:
             print("Felaktig inmatning")
 
-

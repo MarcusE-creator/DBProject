@@ -29,7 +29,7 @@ class Order(Base):
                f' Butik: {self.store.name} |' \
                f' Skapad: {self.date_created} |' \
                f' Status: {self.status} |' \
-               f'\nProdukter:\n\t{self.products_string}'
+               f'\nProdukter:{self.products_string}'
 
     @property
     def products_string(self) -> str:

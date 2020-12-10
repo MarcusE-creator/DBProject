@@ -7,4 +7,4 @@ app/Data/db/settings.*
 app/Data/db/settings*
 
 app/Data_MySQL/db/settings.py
-app/Data_Mongo/db/settings.py
+app/Data_MongoDB/db/settings.py

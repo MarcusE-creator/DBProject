@@ -2,7 +2,8 @@ import Controllers.car_model_controller as cmc
 import Controllers.contact_person_controller as cpc
 import Controllers.customer_car_controller as ccc
 import Controllers.customer_controller as cc
-from UI.tools import int_input
+from Controllers import order_controller
+from UI.tools import int_input, print_title
 
 
 def add_new_customer():
@@ -24,7 +25,6 @@ def add_new_customer():
         cp_phone = input("Kontaktpersonens telefonnummer: ")
         cp_email = input("Kontaktpersonens email:")
         contact_person = cp_name, cp_phone, cp_email
-
 
         customer = (name, street_address, zip_code, city, phone, email, customer_type_id)
         customer, info_string = cc.add_business(customer, contact_person)
@@ -56,14 +56,12 @@ def show_customer(chosen_customer):
         print("Ordrar:")
         for order in chosen_customer.orders:
             print(order)
-        print("------------------")
 
     if hasattr(chosen_customer, 'customer_cars'):
         print("------------------")
         print("Bilar:")
         for car in chosen_customer.customer_cars:
             print(car)
-        print("------------------")
 
     show_customer_menu(chosen_customer)
 
@@ -143,9 +141,8 @@ def show_customer_menu(chosen_customer):
         print("1. Redigera kunden")
         print("2. Lägg till bil")
         print("3. Ta bort bil")
-        print("4. Lägg till order")
-        print("5. Ta bort kunden")
-        print("6. Avbryt")
+        print("4. Ta bort kunden")
+        print("5. Avbryt")
 
         selected = int_input("> ")
 
@@ -159,13 +156,10 @@ def show_customer_menu(chosen_customer):
             remove_car_menu(chosen_customer)
 
         elif selected == 4:
-            place_order()
-
-        elif selected == 5:
             remove_customer(chosen_customer)
             break
 
-        elif selected == 6:
+        elif selected == 5:
             break
 
         else:
@@ -188,7 +182,7 @@ def add_customer_car(customer):
 
     color = input("Bilfärg: ")
     c = (regnr, car_model_id, color)
-    added_string = ccc.add_customer_car(customer, c)
+    added_string, added_car = ccc.add_customer_car(customer, c)
     print(added_string)
 
 
@@ -198,11 +192,10 @@ def remove_car_menu(customer):
 
     while True:
         regnr = input("> ")
-        found_car = ccc.find_customer_car(customer, regnr)
-
-        if found_car:
+        state, found_car = ccc.find_customer_car(customer, regnr)
+        if state:
             print(f"Är du säker på att du vill ta bort denna bil?")
-            #print(f"Modell: {found_car.car_model} | Regnummer: {found_car.regnr} | Ägare: {found_car.customer}")  #TODO funkar bara om customer_car är ett objekt
+            print(f"Regnummer: {found_car} | Ägare: {customer}")
             print("1. Ja")
             print("2. Nej")
             selected = int_input("> ")
@@ -244,8 +237,53 @@ def remove_customer(chosen_customer):
             print("Felaktig inmatning")
 
 
-def place_order():
-    pass
+def edit_contact_person(chosen_customer):
+    """
+    This function is not used because it requires contact_person to be an object, and in this function it is a
+    dictionary. The contact_person object does exist, we did not manage to make it work in this function.
+    """
+    while True:
+        print("-----------------------")
+        print(f"REDIGERA KONTAKTPERSON")
+        print(f"1. Namn {chosen_customer.contact_person.name}")
+        print(f"2. Telefonnummer {chosen_customer.contact_person.phone}")
+        print(f"3. Email {chosen_customer.contact_person.email}")
+        print("4. Avbryt")
+        print("Vilken rad vill du redigera?")
+        selected = input("> ")
+
+        if selected == "1":
+            chosen_customer.contact_person.name = input("Ange nytt namn: ")
+            changed_string = cc.save_changes(chosen_customer)
+            print(changed_string)
+
+        elif selected == "2":
+            chosen_customer.contact_person.phone = input("Ange nytt telefonnummer: ")
+            changed_string = cc.save_changes(chosen_customer)
+            print(changed_string)
+
+        elif selected == "3":
+            chosen_customer.contact_person.email = input("Ange ny email: ")
+            changed_string = cc.save_changes(chosen_customer)
+            print(changed_string)
+
+        elif selected == "4":
+            break
+
+        else:
+            print("Felaktig inmatning")
+
+
+def add_contact_person(chosen_customer):
+    print("LÄGGA TILL NY KONTAKTPERSON")
+    print("---------------------------")
+    print("Fyll i uppgifter för den nya kontaktpersonen:")
+    cp_name = input("Kontaktpersonens namn: ")
+    cp_phone = input("Kontaktpersonens telefonnummer: ")
+    cp_email = input("Kontaktpersonens email:")
+    contact_person = cp_name, cp_phone, cp_email
+    added_string = cpc.add_contact_person(contact_person, chosen_customer)
+    print(added_string)
 
 
 def edit_customer(chosen_customer):
@@ -266,49 +304,35 @@ def edit_customer(chosen_customer):
 
         if selected == 1:
             chosen_customer.name = input("Ange nytt namn: ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 2:
             chosen_customer.street_address = input("Ange ny address): ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 3:
             chosen_customer.zip_code = input("Ange ny postkod: ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 4:
             chosen_customer.email = input("Ange ny mail: ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 5:
             chosen_customer.phone = input("Ange nytt telefonnummer: ")
-            cc.save_changes(chosen_customer)
             changed_string = cc.save_changes(chosen_customer)
             print(changed_string)
 
         elif selected == 6:
-            while True:
-                cp_id = int_input("Ange id för den nya kontaktpersonen: ")
-
-                if cpc.find_contact_person(cp_id):
-                    chosen_customer.contact_id = cp_id
-                    changed_string = cc.save_changes(chosen_customer)
-                    print(changed_string)
-                    break
-
-                else:
-                    print(f"Hittade ingen kontaktperson med id {cp_id}")
+            add_contact_person(chosen_customer)
 
         elif selected == 7:
             break
+
         else:
             print("Felaktig inmatning")
 

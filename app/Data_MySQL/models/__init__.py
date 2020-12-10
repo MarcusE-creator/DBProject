@@ -12,4 +12,5 @@ def import_modules():
         for name, _object in inspect.getmembers(module, inspect.isclass):
             globals()[name] = _object
 
+
 import_modules()
