@@ -1,6 +1,7 @@
 from ..db import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, types
 from sqlalchemy.orm import relationship
+import app.Data.models
 
 
 class Product(Base):
@@ -19,7 +20,8 @@ class Product(Base):
 
     manufacturer_id = Column(Integer, ForeignKey("partners.id", ondelete="Set Null", onupdate="Cascade"))
     supplier_id = Column(Integer, ForeignKey("partners.id", ondelete="Set Null", onupdate="Cascade"))
-    partners = relationship("Partner", back_populates="products")
+    manufacturer = relationship("Partner", foreign_keys=[manufacturer_id])
+    supplier = relationship("Partner", foreign_keys=[supplier_id])
     car_models = relationship("CarModel", secondary="matching_parts")
 
     def __repr__(self):

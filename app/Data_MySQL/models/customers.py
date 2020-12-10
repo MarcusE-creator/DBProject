@@ -23,10 +23,10 @@ class Customer(Base):
     phone = Column(String(25), nullable=False)
     email = Column(String(100), nullable=False)
 
-    orders = relationship('Order', back_populates='customers')
-    customer_cars = relationship('CustomerCar', back_populates='customers')
-    contact_person = relationship('ContactPerson', back_populates='customers')
+    orders = relationship('Order', back_populates='customer')
+    customer_cars = relationship('CustomerCar', back_populates='customer')
+    contact_person = relationship('ContactPerson', back_populates='customer')
     customer_type = relationship('CustomerType', back_populates='customers')
 
     def __repr__(self):
-        pass
+        return f"{self.name}"

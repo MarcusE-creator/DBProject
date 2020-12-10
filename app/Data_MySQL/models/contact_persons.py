@@ -12,8 +12,8 @@ class ContactPerson(Base):
     phone = Column(String(25), nullable=False)
     email = Column(String(100), nullable=False)
 
-    customer = relationship('Customer', back_populates='contact_persons')
-    partners = relationship('Partner', back_populates='contact_persons')
+    customer = relationship('Customer', back_populates='contact_person')
+    partners = relationship('Partner', back_populates='contact_person')
 
     def __repr__(self):
-        pass
+        return f"{self.name} ({self.id}) - {self.phone}, {self.email}"

@@ -1,6 +1,7 @@
 from sqlalchemy.orm import relationship
 from ..db import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
+import app.Data.models
 
 
 class Employee(Base):
@@ -15,7 +16,7 @@ class Employee(Base):
     email = Column(String(100), nullable=False)
     job_title = Column(String(45), nullable=False)
 
-    store = relationship('Store', back_populates='employees')
+    store = relationship('Store', foreign_keys=[store_id], post_update=True, back_populates='employees')
 
     def __repr__(self):
-        pass
+        return self.name

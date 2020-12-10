@@ -1,6 +1,7 @@
 from sqlalchemy.orm import relationship
 from ..db import Base
 from sqlalchemy import Column, Integer, String
+import app.Data.models
 
 
 class CarModel(Base):
@@ -11,7 +12,7 @@ class CarModel(Base):
     model = Column(String(45), nullable=False)
     year_model = Column(String(4), nullable=False)
 
-    products = relationship("Products", secondary="matching_parts")
+    products = relationship("Product", secondary="matching_parts")
     cars = relationship("CustomerCar", back_populates="car_model")
 
     def __repr__(self):

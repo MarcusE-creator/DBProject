@@ -20,7 +20,6 @@ class Partner(Base):
 
     partner_type = relationship('PartnerType', back_populates='partners')
     contact_person = relationship('ContactPerson', back_populates='partners')
-    products = relationship('Product', back_populates='partners')
 
     def __repr__(self):
         pass
