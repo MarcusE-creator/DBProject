@@ -12,7 +12,11 @@ def add_customer_car(customer, c):
 
 
 def find_customer_car(_, regnr):
-    return session.query(CustomerCar).filter(CustomerCar.regnr.like(f'%{regnr}%')).first()
+    car = session.query(CustomerCar).filter(CustomerCar.regnr.like(f'%{regnr}%')).first()
+    if car:
+        return True, car
+    else:
+        return False
 
 
 def remove_customer_car(_, car):

@@ -35,7 +35,7 @@ def add_business(customer, contact_person):
                          'contact_person': {'name': cp_name,
                                             'phone': cp_phone,
                                             'email': cp_email},
-                         'cars': [],
+                         'customer_cars': [],
                          'orders': []})
     customer.save()
     return customer
@@ -51,7 +51,7 @@ def add_private(customer):
                          'phone': phone,
                          'email': email,
                          'customer_type': customer_type,
-                         'cars': [],
+                         'customer_cars': [],
                          'orders': []})
     customer.save()
     return customer

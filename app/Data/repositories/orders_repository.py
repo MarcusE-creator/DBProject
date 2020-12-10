@@ -2,21 +2,21 @@ def create(**kwargs):
     pass
 
 
-def edit(order: Order) -> Optional[Order]:
+def edit(order):
     pass
 
 
-def find(order_id: int) -> Optional[Order]:
+def find(order_id):
     pass
 
 
-def add_products(*products, order: Order):
+def add_products(*products, order):
     pass
 
 
-def add_product(product, order: Order) -> OrderedProduct:
+def add_product(product, order):
     pass
 
 
-def remove(order: Order):
+def remove(order):
     pass

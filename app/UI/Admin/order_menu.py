@@ -25,16 +25,16 @@ def create_order():
     print_title('Lägg till order')
     order_data = {}
     while True:
-        order_data['customer_id'] = int(input('Kund-id: '))
-        order_data['employee_id'] = int(input('Medarbetar-id: '))
-        order_data['store_id'] = int(input('Butiks-id: '))
+        order_data['customer_id'] = input('Kund-id: ')
+        order_data['employee_id'] = input('Medarbetar-id: ')
+        order_data['store_id'] = input('Butiks-id: ')
         order_data['status'] = 'active'  # TODO: Use enum and default?
         order_data['comment'] = input('Kommentar: ')
         order = order_controller.create(**order_data)
         if order:
             print_title('Lägg till produkter')
             while True:
-                product_id = int(input('Produkt-id: '))
+                product_id = input('Produkt-id: ')
                 product_amount_str = input('Antal (1 är förvalt): ').strip()
                 product_amount = (1 if not product_amount_str.isdigit()
                                   else int(product_amount_str))
@@ -72,7 +72,7 @@ def edit_remove_order():
 
 
 def find_order():
-    order_id = int(input('\nAnge ordernummer: '))
+    order_id = input('\nAnge ordernummer: ')
     order = order_controller.find(order_id)
     if order:
         return order
@@ -151,7 +151,6 @@ def remove_order():
 
 
 def print_order(order) -> None:
-
     order_data = '| ' + ' | '.join(
         str(value)
         for value in (order.id, order.customer.id, order.date_created)

@@ -2,8 +2,7 @@ import Controllers.car_model_controller as cmc
 import Controllers.contact_person_controller as cpc
 import Controllers.customer_car_controller as ccc
 import Controllers.customer_controller as cc
-from Controllers import order_controller
-from UI.tools import int_input, print_title
+from UI.tools import int_input
 
 
 def add_new_customer():
@@ -51,13 +50,13 @@ def show_customer(chosen_customer):
     print(f"Email: {chosen_customer.email}")
     print(f"Telefonnummer: {chosen_customer.phone}")
 
-    if hasattr(chosen_customer, 'orders'):
+    if len(chosen_customer.orders) != 0:
         print("------------------")
         print("Ordrar:")
         for order in chosen_customer.orders:
             print(order)
 
-    if hasattr(chosen_customer, 'customer_cars'):
+    if len(chosen_customer.customer_cars) != 0:
         print("------------------")
         print("Bilar:")
         for car in chosen_customer.customer_cars:
