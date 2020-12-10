@@ -29,8 +29,11 @@ def create(**kwargs):
 
 
 def edit(order: Order) -> Optional[Order]:
-    pass
-
+    try:
+        session.commit()
+        return order
+    except Exception:
+        return None
 
 def find(order_id: int) -> Optional[Order]:
     return session.query(Order).filter_by(id=order_id).one_or_none()
