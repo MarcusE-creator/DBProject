@@ -10,8 +10,9 @@ def add_customer_car(customer, car):  #TODO fungerar ej
 
 def find_customer_car(customer, regnr):
     for car in customer.customer_cars:
-        if car['regnr'] == regnr:
-            return car
+        car_obj = CustomerCar(car)
+        if car_obj.regnr == regnr:
+            return True, car_obj
         else:
             continue
     return None

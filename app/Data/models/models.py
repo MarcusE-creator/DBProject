@@ -32,3 +32,6 @@ class CarModel(Document):
 class CustomerCar(EmbeddedDocument):
     repr_data = 'regnr'
 
+
+class ContactPerson(EmbeddedDocument):
+    repr_data = 'name'

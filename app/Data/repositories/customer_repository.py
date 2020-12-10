@@ -5,8 +5,8 @@ from Data.models.models import Customer
 
 def save_changes(customer):
     customer.save()
-    
-    
+
+
 def find_customer_by_name(keyword):
     query_str = re.compile(f'.*{keyword}.*', re.IGNORECASE)
     return Customer.find(**{'name': query_str})
@@ -32,10 +32,11 @@ def add_business(customer, contact_person):
                          'phone': phone,
                          'email': email,
                          'customer_type': customer_type,
-                         'contact_person': {'contact_name': cp_name,
-                                            'contact_phone': cp_phone,
-                                            'contact_email': cp_email},
-                        'cars': []})
+                         'contact_person': {'name': cp_name,
+                                            'phone': cp_phone,
+                                            'email': cp_email},
+                         'cars': [],
+                         'orders': []})
     customer.save()
     return customer
 
@@ -50,12 +51,11 @@ def add_private(customer):
                          'phone': phone,
                          'email': email,
                          'customer_type': customer_type,
-                        'cars': []})
+                         'cars': [],
+                         'orders': []})
     customer.save()
     return customer
 
 
 def remove_customer(customer):
     Customer.remove(_id=customer._id)
-
-

@@ -1,4 +1,4 @@
-from Data.repositories import order_repository
+from Data.repositories import orders_repository
 
 
 def create(
@@ -9,7 +9,7 @@ def create(
     status,  # TODO: Pass as argument or set default?
     comment='',
 ):
-    return order_repository.create(
+    return orders_repository.create(
             customer_id=customer_id,
             employee_id=employee_id,
             store_id=store_id,
@@ -19,18 +19,18 @@ def create(
 
 
 def edit(order):
-    return order_repository.edit(order)
+    return orders_repository.edit(order)
 
 
 def find(order_id: int):
-    return order_repository.find(order_id)
+    return orders_repository.find(order_id)
 
 
 def add_products(order, *products):
     added_products = []
     for product in products:
         try:
-            added_product = order_repository.add_product(product, order)
+            added_product = orders_repository.add_product(product, order)
             # TODO: Try add one product at the time, looping over amount
             #  range, rolling back or at least asking the customer to
             #  confirm a differing amount.
@@ -43,7 +43,7 @@ def add_products(order, *products):
 
 def add_product(order, product):
     try:
-        return order_repository.add_product(product, order)
+        return orders_repository.add_product(product, order)
     except Exception as e:
         raise ValueError(
             f'Kunde inte lägga till {product[1]} av produkt {product[0]}')
@@ -51,7 +51,7 @@ def add_product(order, product):
 
 def remove(order) -> bool:
     try:
-        order_repository.remove(order)
+        orders_repository.remove(order)
         return True
     except Exception as e:
         print(repr(e), e.__traceback__)
