@@ -22,7 +22,7 @@ def edit(order):
     return orders_repository.edit(order)
 
 
-def find(order_id: int):
+def find(order_id):
     return orders_repository.find(order_id)
 
 

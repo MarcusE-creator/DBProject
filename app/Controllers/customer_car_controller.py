@@ -7,8 +7,8 @@ def add_customer_car(customer, c):
 
 
 def find_customer_car(customer, regnr):
-    car_obj = ccr.find_customer_car(customer, regnr)
-    return car_obj
+    state, car_obj = ccr.find_customer_car(customer, regnr)
+    return state, car_obj
 
 
 def remove_customer_car(customer, car):
