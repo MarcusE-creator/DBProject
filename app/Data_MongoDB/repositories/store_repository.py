@@ -27,7 +27,8 @@ def add_store(store):
                    'zip_code': zip_code,
                    'city': city,
                    'phone': phone,
-                   'email': email})
+                   'email': email,
+                   'employees': []})
     store.save()
     return store
 
