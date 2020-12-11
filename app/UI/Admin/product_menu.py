@@ -28,8 +28,7 @@ def products_menu():
             p = (p_name, p_description, p_inventory_id, p_stock, p_price_in, p_price_out, p_lowest_amount, p_automatic_order_number, p_expected_delivery_date)
             add_product(p)
         elif selected == "3":
-            pass
-            #main_menu()
+            break
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")
 
