@@ -22,8 +22,7 @@ def car_model_menu():
             c = (c_manufacturer, c_model, c_year_model)
             add_car_model(c)
         elif selected == 3:
-            pass
-            #main_menu()
+            break
         else:
             print("Du har gjort ett ogiltigt val. Försök igen.")
 
